@@ -69,5 +69,9 @@ svg{
 }
 
 .selected{
+    background-color: rgb(47, 0, 255) !important;
+}
+
+.valid_move{
     background-color: rgb(32, 248, 32) !important;
 }

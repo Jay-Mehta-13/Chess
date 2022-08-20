@@ -1,8 +1,56 @@
-let check_if_empty = function (position) {
-  console.log("This should check if given position holds any Piece");
+let get_piece = function (cell) {
+  try {
+    let svg = cell.children;
+    let name = svg[0].getAttribute("name");
+    return name;
+  } catch (error) {
+    return null;
+  }
 };
 
-let check_moves = function (piece, position) {
-  console.log("This should give out legal moves");
-  let possible_moves = []; //Store all posible cells for the piece
+let get_position = function (cell) {
+  let cols = { a: 0, b: 1, c: 2, d: 3, e: 4, f: 5, g: 6, h: 7 };
+  let rows = {
+    one: 0,
+    two: 1,
+    three: 2,
+    four: 3,
+    five: 4,
+    six: 5,
+    seven: 6,
+    eight: 7,
+  };
+  let position = {
+    row: rows[cell.parentElement.className.split(" ")[0]],
+    col: cols[cell.className[0]],
+  };
+  return position;
+};
+
+let check_valid_moves = async function (piece_name, position, chessboard) {
+  try {
+    let rep = await fetch(`http://localhost:3000/valid_moves/${piece_name}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        position: position,
+        chessboard: chessboard,
+      }),
+    });
+    let moves = await rep.json();
+    return moves;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+let highlight_cells = function (cells) {
+  let rows = ["one", "two", "three", "four", "five", "six", "seven", "eight"];
+  cells.forEach((cell) => {
+    let cell_row = document.querySelector(`.${rows[cell.row]}`);
+    let cell_col = cell_row.children[cell.col];
+    cell_col.classList.toggle("valid_move");
+  });
 };

@@ -1,4 +1,3 @@
-console.log("Placement.js");
 let selected_cell = null;
 
 let initial_placement = function () {

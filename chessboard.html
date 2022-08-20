@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="Styles/chessboard.css" />
     <script src="Scripts/pieces.js"></script>
     <script src="Scripts/placement.js"></script>
+    <script src="Scripts/legal_moves.js"></script>
   </head>
   <body>
     <div class="col_headers">
@@ -114,18 +115,41 @@
     </div>
     <script>
       let chessboard = initial_placement();
-      console.log(chessboard);
-      function toggle_selection(cell) {
-        if (selected_cell == null) {
-          selected_cell = cell;
-          selected_cell.classList.toggle("selected");
-        } else if (selected_cell == cell) {
-          selected_cell.classList.toggle("selected");
-          selected_cell = null;
-        } else {
-          selected_cell.classList.toggle("selected");
-          selected_cell = cell;
-          selected_cell.classList.toggle("selected");
+      let valid_moves = null;
+      async function toggle_selection(cell) {
+        // Only highlight if cell contains any piece
+        if (cell.firstChild) {
+          if (selected_cell == null) {
+            selected_cell = cell;
+            selected_cell.classList.toggle("selected");
+            // View valid moves for selected piece
+            let selected_piece_name = get_piece(selected_cell);
+            let position = get_position(selected_cell);
+            valid_moves = await check_valid_moves(
+              selected_piece_name,
+              position,
+              chessboard
+            );
+            highlight_cells(valid_moves);
+          } else if (selected_cell == cell) {
+            selected_cell.classList.toggle("selected");
+            highlight_cells(valid_moves);
+            selected_cell = null;
+          } else {
+            selected_cell.classList.toggle("selected");
+            highlight_cells(valid_moves);
+            selected_cell = cell;
+            selected_cell.classList.toggle("selected");
+            // View valid moves for selected piece
+            let selected_piece_name = get_piece(selected_cell);
+            let position = get_position(selected_cell);
+            valid_moves = await check_valid_moves(
+              selected_piece_name,
+              position,
+              chessboard
+            );
+            highlight_cells(valid_moves);
+          }
         }
       }
     </script>

@@ -242,3 +242,5 @@ let pieces = {
   white_queen: white_queen,
   white_rook: white_rook,
 };
+
+module.exports = { pieces };
