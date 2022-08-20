@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chess Board</title>
+    <link rel="stylesheet" href="Styles/chessboard.css" />
+    <script src="Scripts/pieces.js"></script>
+    <script src="Scripts/placement.js"></script>
+  </head>
+  <body>
+    <div class="col_headers">
+      <div class="headers">8</div>
+      <div class="headers">7</div>
+      <div class="headers">6</div>
+      <div class="headers">5</div>
+      <div class="headers">4</div>
+      <div class="headers">3</div>
+      <div class="headers">2</div>
+      <div class="headers">1</div>
+    </div>
+    <div class="board">
+      <div class="row_headers">
+        <div class="headers">A</div>
+        <div class="headers">B</div>
+        <div class="headers">C</div>
+        <div class="headers">D</div>
+        <div class="headers">E</div>
+        <div class="headers">F</div>
+        <div class="headers">G</div>
+        <div class="headers">H</div>
+      </div>
+      <div class="eight row">
+        <div onclick="toggle_selection(this)" class="a col"></div>
+        <div onclick="toggle_selection(this)" class="b col"></div>
+        <div onclick="toggle_selection(this)" class="c col"></div>
+        <div onclick="toggle_selection(this)" class="d col"></div>
+        <div onclick="toggle_selection(this)" class="e col"></div>
+        <div onclick="toggle_selection(this)" class="f col"></div>
+        <div onclick="toggle_selection(this)" class="g col"></div>
+        <div onclick="toggle_selection(this)" class="h col"></div>
+      </div>
+      <div class="seven row">
+        <div onclick="toggle_selection(this)" class="a col"></div>
+        <div onclick="toggle_selection(this)" class="b col"></div>
+        <div onclick="toggle_selection(this)" class="c col"></div>
+        <div onclick="toggle_selection(this)" class="d col"></div>
+        <div onclick="toggle_selection(this)" class="e col"></div>
+        <div onclick="toggle_selection(this)" class="f col"></div>
+        <div onclick="toggle_selection(this)" class="g col"></div>
+        <div onclick="toggle_selection(this)" class="h col"></div>
+      </div>
+      <div class="six row">
+        <div onclick="toggle_selection(this)" class="a col"></div>
+        <div onclick="toggle_selection(this)" class="b col"></div>
+        <div onclick="toggle_selection(this)" class="c col"></div>
+        <div onclick="toggle_selection(this)" class="d col"></div>
+        <div onclick="toggle_selection(this)" class="e col"></div>
+        <div onclick="toggle_selection(this)" class="f col"></div>
+        <div onclick="toggle_selection(this)" class="g col"></div>
+        <div onclick="toggle_selection(this)" class="h col"></div>
+      </div>
+      <div class="five row">
+        <div onclick="toggle_selection(this)" class="a col"></div>
+        <div onclick="toggle_selection(this)" class="b col"></div>
+        <div onclick="toggle_selection(this)" class="c col"></div>
+        <div onclick="toggle_selection(this)" class="d col"></div>
+        <div onclick="toggle_selection(this)" class="e col"></div>
+        <div onclick="toggle_selection(this)" class="f col"></div>
+        <div onclick="toggle_selection(this)" class="g col"></div>
+        <div onclick="toggle_selection(this)" class="h col"></div>
+      </div>
+      <div class="four row">
+        <div onclick="toggle_selection(this)" class="a col"></div>
+        <div onclick="toggle_selection(this)" class="b col"></div>
+        <div onclick="toggle_selection(this)" class="c col"></div>
+        <div onclick="toggle_selection(this)" class="d col"></div>
+        <div onclick="toggle_selection(this)" class="e col"></div>
+        <div onclick="toggle_selection(this)" class="f col"></div>
+        <div onclick="toggle_selection(this)" class="g col"></div>
+        <div onclick="toggle_selection(this)" class="h col"></div>
+      </div>
+      <div class="three row">
+        <div onclick="toggle_selection(this)" class="a col"></div>
+        <div onclick="toggle_selection(this)" class="b col"></div>
+        <div onclick="toggle_selection(this)" class="c col"></div>
+        <div onclick="toggle_selection(this)" class="d col"></div>
+        <div onclick="toggle_selection(this)" class="e col"></div>
+        <div onclick="toggle_selection(this)" class="f col"></div>
+        <div onclick="toggle_selection(this)" class="g col"></div>
+        <div onclick="toggle_selection(this)" class="h col"></div>
+      </div>
+      <div class="two row">
+        <div onclick="toggle_selection(this)" class="a col"></div>
+        <div onclick="toggle_selection(this)" class="b col"></div>
+        <div onclick="toggle_selection(this)" class="c col"></div>
+        <div onclick="toggle_selection(this)" class="d col"></div>
+        <div onclick="toggle_selection(this)" class="e col"></div>
+        <div onclick="toggle_selection(this)" class="f col"></div>
+        <div onclick="toggle_selection(this)" class="g col"></div>
+        <div onclick="toggle_selection(this)" class="h col"></div>
+      </div>
+      <div class="one row">
+        <div onclick="toggle_selection(this)" class="a col"></div>
+        <div onclick="toggle_selection(this)" class="b col"></div>
+        <div onclick="toggle_selection(this)" class="c col"></div>
+        <div onclick="toggle_selection(this)" class="d col"></div>
+        <div onclick="toggle_selection(this)" class="e col"></div>
+        <div onclick="toggle_selection(this)" class="f col"></div>
+        <div onclick="toggle_selection(this)" class="g col"></div>
+        <div onclick="toggle_selection(this)" class="h col"></div>
+      </div>
+    </div>
+    <script>
+      let chessboard = initial_placement();
+      console.log(chessboard);
+      function toggle_selection(cell) {
+        if (selected_cell == null) {
+          selected_cell = cell;
+          selected_cell.classList.toggle("selected");
+        } else if (selected_cell == cell) {
+          selected_cell.classList.toggle("selected");
+          selected_cell = null;
+        } else {
+          selected_cell.classList.toggle("selected");
+          selected_cell = cell;
+          selected_cell.classList.toggle("selected");
+        }
+      }
+    </script>
+  </body>
+</html>
