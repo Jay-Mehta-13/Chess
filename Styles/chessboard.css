@@ -73,5 +73,6 @@ svg{
 }
 
 .valid_move{
+    cursor: pointer;
     background-color: rgb(32, 248, 32) !important;
 }

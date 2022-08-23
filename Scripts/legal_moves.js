@@ -1,8 +1,6 @@
 let get_piece = function (cell) {
   try {
-    let svg = cell.children;
-    let name = svg[0].getAttribute("name");
-    return name;
+    return cell.children[0].getAttribute("name");
   } catch (error) {
     return null;
   }
@@ -20,11 +18,10 @@ let get_position = function (cell) {
     seven: 6,
     eight: 7,
   };
-  let position = {
+  return {
     row: rows[cell.parentElement.className.split(" ")[0]],
     col: cols[cell.className[0]],
   };
-  return position;
 };
 
 let check_valid_moves = async function (piece_name, position, chessboard) {
@@ -39,8 +36,7 @@ let check_valid_moves = async function (piece_name, position, chessboard) {
         chessboard: chessboard,
       }),
     });
-    let moves = await rep.json();
-    return moves;
+    return await rep.json();
   } catch (error) {
     console.log(error);
   }
@@ -52,5 +48,19 @@ let highlight_cells = function (cells) {
     let cell_row = document.querySelector(`.${rows[cell.row]}`);
     let cell_col = cell_row.children[cell.col];
     cell_col.classList.toggle("valid_move");
+    if (cell_col.classList.contains("valid_move")) {
+      cell_col.addEventListener("click", () =>
+        move_piece(cell_col, document.querySelector(".selected"))
+      );
+    } else {
+      cell_col.removeEventListener("click", () =>
+        move_piece(cell_col, document.querySelector(".selected"))
+      );
+    }
   });
+};
+
+let move_piece = function (final, initial) {
+  let svg = initial.children[0];
+  final.appendChild(svg);
 };

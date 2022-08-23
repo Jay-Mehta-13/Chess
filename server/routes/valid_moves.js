@@ -2,15 +2,21 @@ const express = require("express");
 const router = express.Router();
 const { pieces } = require("../pieces");
 
+let white_pawn_moved = [0, 0, 0, 0, 0, 0, 0, 0];
+
 //Check valid moves for given piece and arrangement
 router.post("/white_pawn", (req, res) => {
   let position = req.body.position;
   let chessboard = req.body.chessboard;
   let valid_moves = [];
-  console.log("Piece is positioned at :", position);
   let forward = { row: position.row + 1, col: position.col };
+  let forward_double = { row: position.row + 2, col: position.col };
   let forward_left = { row: position.row + 1, col: position.col - 1 };
   let forward_right = { row: position.row + 1, col: position.col + 1 };
+  if (white_pawn_moved[position.col] == 0) {
+    valid_moves.push(forward_double);
+    white_pawn_moved[position.col] = 1;
+  }
   if (
     chessboard[forward.row][forward.col] == null &&
     8 > forward.row > -1 &&
@@ -32,7 +38,6 @@ router.post("/white_pawn", (req, res) => {
   ) {
     valid_moves.push(forward_right);
   }
-  console.log(valid_moves);
   res.send(valid_moves);
 });
 
